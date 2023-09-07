@@ -54,42 +54,42 @@ class _HomeWidgetState extends State<HomeWidget> {
               ),
               Expanded(
                 child: SizedBox(
-                  child: BlocBuilder<HomeBloc, HomeState>(
+                  child: BlocConsumer<HomeBloc, HomeState>(
+                    listener: (context, state) {
+                      if (_refreshController.isRefresh) {
+                        _refreshController.refreshCompleted();
+                      }
+                    },
                     builder: (context, state) {
                       if (state is NewsState) {
-                        return BlocListener<HomeBloc, HomeState>(
-                          listener: (context, state) {
-                            _refreshController.refreshCompleted();
+                        return SmartRefresher(
+                          enablePullDown: true,
+                          controller: _refreshController,
+                          onRefresh: () {
+                            context
+                                .read<HomeBloc>()
+                                .add(const RefreshNewsEvent());
                           },
-                          child: SmartRefresher(
-                            enablePullDown: true,
-                            controller: _refreshController,
-                            onRefresh: () {
-                              context
-                                  .read<HomeBloc>()
-                                  .add(const RefreshNewsEvent());
-                            },
-                            child: ListView.builder(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 10),
-                              itemCount: state.news.length,
-                              itemBuilder: (context, index) => NewItem(
-                                title: state.news[index].title,
-                                typeNew: state.news[index].categoryName,
-                                date: state.news[index].createdAt,
-                                isNew: state.news[index].isNew(),
-                                onTap: () {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    backgroundColor: Colors.transparent,
-                                    builder: (context) {
-                                      return DetailNew(
-                                        detailNew: state.news[index],
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
+                          child: ListView.builder(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 10),
+                            itemCount: state.news.length,
+                            itemBuilder: (context, index) => NewItem(
+                              title: state.news[index].title,
+                              typeNew: state.news[index].categoryName,
+                              date: state.news[index].createdAt,
+                              isNew: state.news[index].isNew(),
+                              onTap: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  backgroundColor: Colors.transparent,
+                                  builder: (context) {
+                                    return DetailNew(
+                                      detailNew: state.news[index],
+                                    );
+                                  },
+                                );
+                              },
                             ),
                           ),
                         );

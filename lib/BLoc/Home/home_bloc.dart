@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:widget_app/BLoc/Home/home_event.dart';
 import 'package:widget_app/BLoc/Home/home_state.dart';
 import 'package:widget_app/Models/News/ResponseNews.dart';
