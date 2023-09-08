@@ -1,4 +1,4 @@
-import 'package:widget_app/Models/BaseResponse.dart';
+import '../models/baseResponse.dart';
 
 class ApiResponse<T extends BaseResponse> {
   late List<T> _datas;

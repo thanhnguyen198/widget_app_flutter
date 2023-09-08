@@ -1,5 +1,5 @@
-import 'package:widget_app/Models/BaseResponse.dart';
 import 'package:intl/intl.dart';
+import '../../models/baseResponse.dart';
 
 class ResponseNews extends BaseResponse {
   String? endAt;

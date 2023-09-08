@@ -28,7 +28,11 @@ class _NavigationBarState extends State<MyNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: _widgetOptions[_selectedIndex]),
+      body: Center(
+          child: IndexedStack(
+        index: _selectedIndex,
+        children: _widgetOptions,
+      )),
       bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(

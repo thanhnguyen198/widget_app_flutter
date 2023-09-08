@@ -1,10 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:widget_app/bloc/login/login_bloc.dart';
+import 'package:widget_app/bloc/login/login_event.dart';
+import 'package:widget_app/bloc/login/login_state.dart';
 import 'package:widget_app/components/navigationBar.dart';
 
-void main() {
+import 'screen/splashScreen.dart';
+import 'utils/prefs.dart';
+
+void main() async {
   // runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  await Prefs.init();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     title: 'Navigation Basics',
@@ -19,8 +28,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: MyNavigationBar(),
+    return Scaffold(
+      body: BlocProvider(
+        create: (_) => LoginBloc()..add(const LoginEvent()),
+        child: BlocBuilder<LoginBloc, LoginState>(
+          builder: (context, state) {
+            return AnimatedContainer(
+                duration: const Duration(seconds: 1),
+                child: state.loginSuccess
+                    ? const MyNavigationBar()
+                    : const SplashScreen());
+          },
+        ),
+      ),
     );
   }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:widget_app/BLoc/Home/home_bloc.dart';
-import 'package:widget_app/BLoc/Home/home_event.dart';
-import 'package:widget_app/BLoc/Home/home_state.dart';
-import 'package:widget_app/Models/News/ResponseNews.dart';
+import 'package:widget_app/bloc/home/home_bloc.dart';
+import 'package:widget_app/bloc/home/home_event.dart';
+import 'package:widget_app/bloc/home/home_state.dart';
 import 'package:widget_app/colors/hexColor.dart';
+import 'package:widget_app/models/news/responseNews.dart';
 import '../components/home/detailNew.dart';
 import '../components/home/newItem.dart';
 
@@ -17,18 +17,20 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+  late HomeBloc homeBloc;
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
   @override
   void initState() {
     super.initState();
+    homeBloc = HomeBloc()..add(const GetNewsEvent(page: 1));
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => HomeBloc()..add(const GetNewsEvent(page: 1)),
+      create: (_) => homeBloc,
       child: Scaffold(
           appBar: AppBar(
             title: const Text(

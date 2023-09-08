@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
-import '../../Models/News/ResponseNews.dart';
+import '../../models/news/responseNews.dart';
 import '../../colors/hexColor.dart';
 import 'tagNew.dart';
 import 'typeNewText.dart';

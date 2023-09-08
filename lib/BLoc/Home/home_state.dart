@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:widget_app/Models/News/ResponseNews.dart';
 import 'package:meta/meta.dart';
+
+import '../../models/news/responseNews.dart';
 
 @immutable
 abstract class HomeState extends Equatable {

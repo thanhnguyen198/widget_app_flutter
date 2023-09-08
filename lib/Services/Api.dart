@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:widget_app/Models/ApiResponse.dart';
-import 'package:widget_app/Models/Login/LoginParameter.dart';
-import 'package:widget_app/Models/Login/ResponseLogin.dart';
-import 'package:widget_app/Models/News/NewsParameter.dart';
-import 'package:widget_app/Models/News/ResponseNews.dart';
+
+import '../models/login/loginParameter.dart';
+import '../models/apiResponse.dart';
+import '../models/login/responseLogin.dart';
+import '../models/news/responseNews.dart';
+import '../models/news/newsParameter.dart';
 
 class Api {
   static var uri = "https://dev.kisekaeapp.com/api";
