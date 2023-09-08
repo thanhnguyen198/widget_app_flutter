@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -28,14 +25,10 @@ class _HomeWidgetState extends State<HomeWidget> {
     super.initState();
   }
 
-  Future<Void> _refreshNews() {
-    return Future.delayed(Duration.zero);
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeBloc()..add(const GetNewsEvent(page: 1)),
+      create: (_) => HomeBloc()..add(const GetNewsEvent(page: 1)),
       child: Scaffold(
           appBar: AppBar(
             title: const Text(

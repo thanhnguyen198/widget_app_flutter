@@ -22,12 +22,3 @@ class NewsState extends HomeState {
   @override
   List<Object> get props => [news];
 }
-
-class LoadingNewState extends HomeState {
-  final bool isLoading;
-  const LoadingNewState({required this.isLoading});
-  const LoadingNewState.loading() : this(isLoading: true);
-  const LoadingNewState.unLoading() : this(isLoading: false);
-  @override
-  List<Object> get props => [isLoading];
-}
