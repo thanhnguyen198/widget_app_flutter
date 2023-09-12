@@ -1,17 +1,17 @@
 import 'package:bloc/bloc.dart';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:widget_app/utils/prefs.dart';
-import '../../models/news/newsParameter.dart';
-import '../../models/news/responseNews.dart';
-import '../../services/api.dart';
+import 'package:widget_app/api_repository/home_repository.dart';
+import 'package:widget_app/models/news/new.dart';
 import 'home_event.dart';
 import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final api = Api();
-  List<ResponseNews> news = [];
-  HomeBloc() : super(const HomeInitState()) {
+  late final HomeRepoImpl _homeRepo;
+
+  List<New> news = [];
+  HomeBloc({required HomeRepoImpl homeRepo}) : super(const HomeInitState()) {
+    _homeRepo = homeRepo;
     on(_onGetNews);
     on(_onRefreshNews);
   }
@@ -26,16 +26,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(NewsState(news: news ?? []));
   }
 
-  Future<List<ResponseNews>?> _fetchNews(
+  Future<List<New>?> _fetchNews(
       {required page, bool isRefreseh = false}) async {
     if (!isRefreseh) {
       EasyLoading.show(status: 'Loading...');
     }
     try {
-      final responseNews = await api.fetchNews(
-        NewsParameter(page),
-        Prefs.getString('accessToken') ?? '',
-      );
+      final responseNews = await _homeRepo.getNews(page);
       return responseNews;
     } catch (e) {
       print(e);

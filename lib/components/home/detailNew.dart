@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:widget_app/models/news/new.dart';
 
-import '../../models/news/responseNews.dart';
 import '../../colors/hexColor.dart';
 import 'tagNew.dart';
 import 'typeNewText.dart';
 
 class DetailNew extends StatelessWidget {
-  final ResponseNews detailNew;
+  final New detailNew;
 
   const DetailNew({super.key, required this.detailNew});
 

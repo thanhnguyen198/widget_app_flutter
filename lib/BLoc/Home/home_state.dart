@@ -1,7 +1,6 @@
-import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-
-import '../../models/news/responseNews.dart';
+import 'package:equatable/equatable.dart';
+import '../../models/news/new.dart';
 
 @immutable
 abstract class HomeState extends Equatable {
@@ -17,7 +16,7 @@ class HomeInitState extends HomeState {
 
 @immutable
 class NewsState extends HomeState {
-  final List<ResponseNews> news;
+  final List<New> news;
   const NewsState({required this.news});
   const NewsState.empty() : this(news: const []);
   @override

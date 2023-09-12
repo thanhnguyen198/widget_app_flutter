@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:widget_app/api_repository/home_repository.dart';
 import 'package:widget_app/bloc/home/home_bloc.dart';
 import 'package:widget_app/bloc/home/home_event.dart';
 import 'package:widget_app/bloc/home/home_state.dart';
 import 'package:widget_app/colors/hexColor.dart';
-import 'package:widget_app/models/news/responseNews.dart';
+import 'package:widget_app/models/news/new.dart';
 import '../components/home/detailNew.dart';
 import '../components/home/newItem.dart';
 
@@ -24,7 +25,8 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   void initState() {
     super.initState();
-    homeBloc = HomeBloc()..add(const GetNewsEvent(page: 1));
+    homeBloc = HomeBloc(homeRepo: HomeRepoImpl())
+      ..add(const GetNewsEvent(page: 1));
   }
 
   @override
